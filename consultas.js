@@ -13,4 +13,21 @@ const agregarViaje = async (destino, presupuesto) => {
   console.log('Viaje agregado');
 };
 
-module.exports = { obtenerViajes, agregarViaje };
+const modificarPresupuesto = async (presupuesto, id) => {
+  const consulta = 'UPDATE viajes SET presupuesto = $1 WHERE id = $2';
+  const values = [presupuesto, id];
+  const result = await pool.query(consulta, values);
+};
+
+const eliminarViaje = async (id) => {
+  const consulta = 'DELETE FROM viajes WHERE id = $1';
+  const values = [id];
+  await pool.query(consulta, values);
+};
+
+module.exports = {
+  obtenerViajes,
+  agregarViaje,
+  modificarPresupuesto,
+  eliminarViaje,
+};
